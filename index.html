@@ -10,18 +10,56 @@
         <script type="text/javascript" charset="utf-8"
         src="phonegap.js"></script>
         <script type="text/javascript" charset="utf-8">
-function onBodyLoad() {
-document.addEventListener("deviceready",onDeviceReady,
-false);
+
+
+    function onBodyLoad() {
+    document.addEventListener("deviceready",onDeviceReady,
+    false);
+        }
+    function onDeviceReady() {
+        navigator.notification.alert("PhoneGap is ready!")
+        }
+
+
+    // navigator.notification.confirm
+    function onConfirm(buttonIndex) {
+        navigator.notification.alert('You selected button ' + buttonIndex);
+    }
+    function showConfirm() {
+    navigator.notification.confirm(
+        'You are the winner!',  // message
+        onConfirm,              // callback to invoke with index of button pressed
+        'Game Over',            // title
+        'Exit,Restart'          // buttonLabels
+    );
 }
-function onDeviceReady() {
-    navigator.notification.alert("PhoneGap is ready!")
-}
+    //navigator.notification.prompt
+    function dialogPrompt() {
+   var message = "Am I Prompt Dialog?";
+   var title = "PROMPT";
+   var buttonLabels = ["NO","YES"];
+     navigator.notification.prompt(message, promptCallback, 
+      title, buttonLabels);}
+
+   function promptCallback(result) {
+    navigator.notification.alert("You clicked " + result.buttonIndex + " button! \n" + 
+         "You entered " +  result.input1);
+   }
+	// Navigator.notification.beep
+    function playBeep() {
+        navigator.notification.beep(3);
+    }
+
 </script>
 </head>
 <body onload="onBodyLoad()">
         <h1>HelloWorld2</h1>
         <p>This is a sample PhoneGap application.</p>
         <p>Luis Eduardo Garcia Caltzoncin</p>
+        <p><a href="#" onclick="showConfirm(); return false;">Show Confirm</a></p>
+        <p><a href="#" onclick="showConfirm(); return false;">Show Confirm</a></p>
+        <p><a href="#" onclick="dialogPrompt(); return false;">Show Prompt</a></p>
+        <p><a href="#" onclick="playBeep(); return false;">Show Beep</a></p>
+
     </body>
     </html>
